@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del producto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">🎬 Streaming Store</div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="orders.html">Mis pedidos</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="productDetail"></div>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Streaming Store</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const catalogo = JSON.parse(localStorage.getItem("catalogoData")||"[]");
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get("id"));
+    const producto = catalogo.find(p=>p.id===id);
+    const container=document.getElementById("productDetail");
+
+    if(producto){
+      container.innerHTML=`
+        <div class="card">
+          <img src="${producto.img}" alt="${producto.nombre}">
+          <h2>${producto.nombre}</h2>
+          <p>${producto.desc}</p>
+          <p class="price">$${producto.precio.toFixed(2)}</p>
+          <button onclick="addToCart(${producto.id})">Añadir al carrito</button>
+        </div>`;
+    } else {
+      container.innerHTML="<p>Producto no encontrado.</p>";
+    }
+
+    function addToCart(id){
+      let cart = JSON.parse(localStorage.getItem("cart")||"[]");
+      const prod = catalogo.find(p=>p.id===id);
+      const item = cart.find(i=>i.id===id);
+      if(item) item.qty++;
+      else cart.push({id:prod.id, nombre:prod.nombre, precio:prod.precio, qty:1});
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Producto añadido al carrito");
+    }
+  </script>
+</body>
+</html>

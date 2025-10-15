@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda de Cuentas de Streaming</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">🎬 Streaming Store</div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="orders.html">Mis pedidos</a>
+      <a href="#" id="cartBtn">Carrito (<span id="cartCount">0</span>)</a>
+      <a href="#" id="loginBtn">Login / Registro</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Catálogo de cuentas de streaming</h1>
+    <p>Elige tu plataforma favorita y añade al carrito. Pagos con PayPal, Cripto o métodos colombianos (PSE, Nequi, Daviplata).</p>
+    <div id="catalogo" class="catalogo"></div>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Streaming Store</p>
+  </footer>
+
+  
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('cartModal')">&times;</span>
+      <h2>Carrito</h2>
+      <div id="cartItems"></div>
+      <p><strong>Total:</strong> <span id="cartTotal">$0.00</span></p>
+      <h3>Método de pago</h3>
+      <label><input type="radio" name="pay" value="paypal"> PayPal</label><br>
+      <label><input type="radio" name="pay" value="crypto"> Criptomonedas</label><br>
+      <label><input type="radio" name="pay" value="pse"> PSE</label><br>
+      <label><input type="radio" name="pay" value="nequi"> Nequi</label><br>
+      <label><input type="radio" name="pay" value="daviplata"> Daviplata</label>
+      <div class="cart-actions">
+        <button id="checkoutBtn">Finalizar compra</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Acceso</h2>
+      <div class="tabs">
+        <button id="tabLogin" class="tab active">Login</button>
+        <button id="tabRegister" class="tab">Registro</button>
+      </div>
+
+      <form id="loginForm" class="form visible">
+        <input type="email" id="loginEmail" placeholder="Correo" required>
+        <input type="password" id="loginPass" placeholder="Contraseña" required>
+        <button type="submit" class="btn-primary">Ingresar</button>
+      </form>
+
+      <form id="registerForm" class="form">
+        <input type="text" id="regName" placeholder="Nombre completo" required>
+        <input type="number" id="regAge" placeholder="Edad" required>
+        <input type="tel" id="regPhone" placeholder="Número de teléfono" required>
+        <input type="text" id="regCity" placeholder="Ciudad" required>
+        <input type="email" id="regEmail" placeholder="Correo" required>
+        <input type="password" id="regPass" placeholder="Contraseña" required>
+        <button type="submit" class="btn-primary">Crear cuenta</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
